@@ -702,6 +702,9 @@ Examples of allowed techniques include, but are not limited to:
   (Submitters should include in their submission details of how the ordering was
   derived.)
 
+* LLM Attentions and algorithms that improve compute and memory efficieny, while preserving accuracy 
+  (eg. MHA, GQA, MQA, vLLM etc)
+
 The following techniques are disallowed:
 
 * Wholesale weight replacement or supplements
@@ -842,9 +845,9 @@ The DLRMv2 MLPerf inference code has an option to aggregate multiple consecutive
 
 === LLM Benchmarks
 
-Q: What algorithm is used for the auto-regressive decoding loop?
+Q: What algorithm is used for the auto-regressive decoding loop for Llama-v2 and GPTJ?
 
-A: The benchmark uses the beam search algorithm described at a high level here: https://huggingface.co/blog/how-to-generate#beam-search. Specifically, we use a beam width of 4 and enable early termination.
+A: The Llama-v2 benchmark uses greedy search decoding, while the GPTJ benchmark uses the beam search algorithm described at a high level here: https://huggingface.co/blog/how-to-generate#beam-search. Specifically, we use a beam width of 4 and enable early termination.
 
 Q: MLPerf disallows caching queries. Is using a KV-cache in decoding allowed?
 
@@ -860,7 +863,7 @@ A: The entries of the KV-cache should be handled in the same way as the activati
 
 Q: How does query batching affect the KV-cache usage?
 
-A: The size of the KV-cache is determined by the batch size. The KV-cache size can also be cached across queries, in accordance with the rule of allowing caching of sizes and shapes. Other than batching and quantization rules (that apply to activations), alternative attention mechanisms (such as paged, multi-query, sparse, group query attention, etc.) or wholesale replacement of the reference KV-cache execution are not permitted.
+A: The size of the KV-cache is determined by the batch size. The KV-cache size can also be cached across queries, in accordance with the rule of allowing caching of sizes and shapes.
 
 === Audit
 
